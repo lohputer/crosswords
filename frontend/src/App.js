@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom'
+import Home from './components/Home';
+import Header from './components/Header';
+import Register from './components/Register';
+import Login from './components/Login';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [loggedInUser, setLoggedInUser] = useState(null)
+    const handleLogout = () => {
+        localStorage.removeItem('token'); 
+        setLoggedInUser(null); 
+    };
+    return (
+        <div className="App vw-100 vh-100 flex min-h-screen flex-col items-centers">
+            <Header />
+            <Routes>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/login" element={<Register />}></Route>
+                <Route path="/logout" element={<Login />}></Route>
+            </Routes>
+        </div>
+    );
+};
 
 export default App;
+
+/**
+ * 
+ * {loggedInUser ? (
+                    <div>
+                        <p>Welcome {loggedInUser}</p>
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
+                ) : (
+                    <div>
+                        <Register />
+                        <Login setLoggedInUser={setLoggedInUser} />
+                    </div>
+                )}
+ */
