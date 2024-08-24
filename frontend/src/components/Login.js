@@ -7,8 +7,6 @@ const Login = ({ setLoggedInUser }) => {
     });
     const [message, setMessage] = useState('');
 
-    const { username, password } = formData;
-
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     const onSubmit = async e => {
         e.preventDefault();
@@ -30,13 +28,11 @@ const Login = ({ setLoggedInUser }) => {
                 <input type="text" 
                        placeholder="Username" 
                        name="username" 
-                       value={username} 
                        onChange={onChange} 
                        required />
                 <input type="password" 
                        placeholder="Password" 
                        name="password" 
-                       value={password} 
                        onChange={onChange} 
                        required />
                 <button type="submit">Login</button>

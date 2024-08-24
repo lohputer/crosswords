@@ -8,22 +8,12 @@ const Register = () => {
     });
     const [message, setMessage] = useState('');
 
-    const { username, password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const onSubmit = async e => {
         e.preventDefault();
-        try {
-            const res = await axios.post('http://localhost:5000/api/auth/register', {
-                username,
-                password
-            });
-            setMessage('Registered successfully');  
-        } catch (err) {
-            console.error(err.response.data);
-            setMessage('Failed to register, User already exists');  
-        }
+        
     };
 
     return (
