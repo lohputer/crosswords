@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const CrosswordSchema = new mongoose.Schema({
-    _id : mongoose.Schema.Types.ObjectId,
     _creator : { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     words : [String],
     hints: [String],
@@ -11,7 +10,6 @@ const CrosswordSchema = new mongoose.Schema({
 })
 
 const CrosswordSolveSchema = new mongoose.Schema({
-    _id : mongoose.Schema.Types.ObjectId,
     secondsSpent: Number,
     crossword: { type: mongoose.Schema.Types.ObjectId, ref: 'Crossword' },
     currLayout: [[]],
@@ -19,7 +17,6 @@ const CrosswordSolveSchema = new mongoose.Schema({
 })
 
 const UserSchema = new mongoose.Schema({
-    _id     : mongoose.Schema.Types.ObjectId,
     username: {
         type: String,
         required: true,

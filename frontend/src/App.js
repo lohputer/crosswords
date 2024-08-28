@@ -1,41 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
+import PrivateRoute from './utils/PrivateRoute'
 import Home from './components/Home';
 import Header from './components/Header';
 import Register from './components/Register';
 import Login from './components/Login';
+import CreatePage from './components/Create';
 
 const App = () => {
-    const [loggedInUser, setLoggedInUser] = useState(null)
-    const handleLogout = () => {
-        localStorage.removeItem('token'); 
-        setLoggedInUser(null); 
-    };
     return (
         <div className="App vw-100 vh-100 flex min-h-screen flex-col items-centers">
-            <Header />
-            <Routes>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/login" element={<Register />}></Route>
-                <Route path="/logout" element={<Login />}></Route>
-            </Routes>
+            <AuthProvider>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/register" element={<Register />}></Route>
+                    <Route path="/login" element={<Login />}></Route>
+                    <Route path="/create" element={<PrivateRoute><CreatePage /></PrivateRoute>}></Route>
+                </Routes>
+            </AuthProvider> 
         </div>
     );
 };
 
 export default App;
-
-/**
- * 
- * {loggedInUser ? (
-                    <div>
-                        <p>Welcome {loggedInUser}</p>
-                        <button onClick={handleLogout}>Logout</button>
-                    </div>
-                ) : (
-                    <div>
-                        <Register />
-                        <Login setLoggedInUser={setLoggedInUser} />
-                    </div>
-                )}
- */
